@@ -22,16 +22,14 @@
  * @brief Activates specified LED while deactivating others
  * @param led Number of LED to activate (1-3)
  */
-void turn_on_led(int led)
-{
+void turn_on_led(int led) {
     // Deactivate all LEDs first
     gpio_set_level(LED1, 0);
     gpio_set_level(LED2, 0);
     gpio_set_level(LED3, 0);
 
     // Activate selected LED
-    switch(led)
-    {
+    switch(led) {
         case 1:
             gpio_set_level(LED1, 1);
             break;
@@ -48,8 +46,7 @@ void turn_on_led(int led)
  * @brief Main task for LED sequence control
  * @param pvParameter Task parameters (unused)
  */
-void blinking_task(void *pvParameter)
-{
+void blinking_task(void *pvParameter) {
     // Configure GPIO pins as digital outputs
     gpio_set_direction(LED1, GPIO_MODE_OUTPUT);
     gpio_set_direction(LED2, GPIO_MODE_OUTPUT);
@@ -68,8 +65,7 @@ void blinking_task(void *pvParameter)
 /**
  * @brief Main application entry point
  */
-void app_main()
-{
+void app_main() {
     // Create FreeRTOS task for LED sequence
     xTaskCreate(&blinking_task,   // Task function
                 "blinking_task",  // Task name
