@@ -46,7 +46,7 @@ static esp_err_t read_data(gpio_num_t gpio, uint8_t *data) {
 }
 
 esp_err_t dht_read(dht_sensor_type_t type, gpio_num_t gpio_num, dht_data_t *data) {
-    static uint32_t last_read_time = 0;
+    static uint32_t last_read_time = UINT32_MAX - (DHT_SAMPLE_INTERVAL * 1000);
     uint32_t current_time = esp_timer_get_time();
     
     if (current_time - last_read_time < DHT_SAMPLE_INTERVAL * 1000) {
